@@ -189,6 +189,84 @@
       "preserveMemberOrder": false,
       "members": [
         {
+          "kind": "Function",
+          "canonicalReference": "@khni/error-handler!createErrHandlerMiddleware:function(1)",
+          "docComment": "/**\n * Creates a comprehensive error handling middleware for Express.js applications. This middleware uses a chain of responsibility pattern to handle different error types with appropriate strategies and serializers.\n *\n * @remarks\n *\n * The error handler uses the following strategy chain: 1. **HttpErrorHandlerStrategy** - Handles `HttpError` instances with proper status codes and serialization 2. **InputValidationErrorHandlerStrategy** - Handles `InputValidationError` instances with 400 status 3. **FallbackErrorStrategy** - Catches any unhandled errors and returns a generic 500 response\n *\n * Each strategy in the chain is tried in order until one handles the error.\n *\n * @param logger - Optional logger instance for error logging. If provided, errors will be logged according to their log levels. If not provided, errors will still be handled but not logged.\n *\n * @returns An Express.js error handling middleware function that can be used with `app.use()`\n *\n * @example\n * ```typescript\n * // Basic usage with default logging (no logger provided)\n * import { createErrHandlerMiddleware } from './middleware/errorHandler.js';\n *\n * app.use(createErrHandlerMiddleware());\n *\n * // Usage with custom logger\n * import { createErrHandlerMiddleware } from './middleware/errorHandler.js';\n * import { ConsoleLogger } from './logging/ConsoleLogger.js';\n *\n * const logger = new ConsoleLogger();\n * app.use(createErrHandlerMiddleware(logger));\n *\n * // Usage in Express application\n * import express from 'express';\n * import { createErrHandlerMiddleware } from './middleware/errorHandler.js';\n *\n * const app = express();\n *\n * // Add your routes and other middleware first\n * app.use(express.json());\n * app.use('/api', apiRoutes);\n *\n * // Then add the error handler middleware (must be last)\n * app.use(createErrHandlerMiddleware());\n * ```\n *\n * @example\n * ```typescript\n * // Complete Express.js setup example\n * import express from 'express';\n * import { createErrHandlerMiddleware } from './middleware/errorHandler.js';\n * import { ILogger } from './errors/types.js';\n *\n * class MyLogger implements ILogger {\n *   error(message: string, meta?: {}) {\n *     console.error(`[ERROR] ${message}`, meta);\n *   }\n *   warn(message: string, meta?: {}) {\n *     console.warn(`[WARN] ${message}`, meta);\n *   }\n *   info(message: string, meta?: {}) {\n *     console.info(`[INFO] ${message}`, meta);\n *   }\n *   debug(message: string, meta?: {}) {\n *     console.debug(`[DEBUG] ${message}`, meta);\n *   }\n * }\n *\n * const app = express();\n * const logger = new MyLogger();\n *\n * // Application routes\n * app.get('/users/:id', (req, res) => {\n *   // Your route logic here\n *   // If any middleware or route throws an error, it will be caught by our error handler\n * });\n *\n * // Error handling middleware (must be the last middleware)\n * app.use(createErrHandlerMiddleware(logger));\n *\n * app.listen(3000, () => {\n *   console.log('Server running on port 3000');\n * });\n * ```\n *\n * @see\n *\n * {@link HttpErrorHandlerStrategy} for HTTP error handling\n *\n * @see\n *\n * {@link InputValidationErrorHandlerStrategy} for validation error handling\n *\n * @see\n *\n * {@link FallbackErrorStrategy} for unhandled error fallback\n *\n * @see\n *\n * {@link HttpErrorSerializer} for HTTP error response serialization\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "createErrHandlerMiddleware: (logger?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ILogger",
+              "canonicalReference": "@khni/error-handler!ILogger:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Content",
+              "text": "(err: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error",
+              "canonicalReference": "!Error:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", req: import(\"express\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "Request",
+              "canonicalReference": "@types/express!e.Request:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", res: import(\"express\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "Response",
+              "canonicalReference": "@types/express!e.Response:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", next: import(\"express\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "NextFunction",
+              "canonicalReference": "@types/express!e.NextFunction:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            }
+          ],
+          "fileUrlPath": "src/handler/factory.ts",
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "logger",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "createErrHandlerMiddleware"
+        },
+        {
           "kind": "Class",
           "canonicalReference": "@khni/error-handler!CustomError:class",
           "docComment": "/**\n * A custom error class that extends the native JavaScript Error class. Provides additional properties for error handling and logging.\n *\n * @typeParam CodeType - The type of the error code (string, number, enum, etc.)\n *\n * @public\n */\n",
@@ -440,6 +518,128 @@
           }
         },
         {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!ErrorHandler:class",
+          "docComment": "/**\n * Main error handler that implements the Chain of Responsibility pattern. Delegates error handling to specialized strategies based on error type.\n *\n * @example\n * ```typescript\n * const errorHandler = new ErrorHandler([\n *   new HttpErrorHandlerStrategy(serializer, logger),\n *   new InputValidationErrorHandlerStrategy(logger),\n *   new FallbackErrorStrategy(logger)\n * ]);\n *\n * // Use in Express\n * app.use(errorHandler.handle);\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class ErrorHandler "
+            }
+          ],
+          "fileUrlPath": "src/handler/ErrorHandlerContext.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "ErrorHandler",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!ErrorHandler:constructor(1)",
+              "docComment": "/**\n * Creates a new ErrorHandler instance with the provided strategies. Strategies are evaluated in order until one can handle the error.\n *\n * @param strategies - Array of error handling strategies to use\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(strategies: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IErrorHandlingStrategy",
+                  "canonicalReference": "@khni/error-handler!~IErrorHandlingStrategy:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "strategies",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!ErrorHandler#handle:member",
+              "docComment": "/**\n * Express.js error handling middleware function. Processes errors through the strategy chain and sends appropriate responses.\n *\n * @param err - The error to handle\n *\n * @param req - Express request object\n *\n * @param res - Express response object\n *\n * @param next - Express next function (not used in final error handler)\n *\n * @example\n * ```typescript\n * // Throwing errors that will be handled by the strategy chain\n * app.get('/users/:id', (req, res, next) => {\n *   if (!isValidId(req.params.id)) {\n *     throw new Inpuimport type { NextFunction, Response, Request } from \"express\";\n *\n *   import { IErrorHandlingStrategy } from \"./interfaces/IErrorHandlingStrategy.js\";\n *\n *   export class ErrorHandler {\n *     constructor(private strategies: IErrorHandlingStrategy[]) {}\n *\n *     public handle = (\n *       err: Error,\n *       req: Request,\n *       res: Response,\n *       next: NextFunction\n *     ): void => {\n *       const strategy = this.strategies.find((s) => s.canHandle(err));\n *\n *       if (strategy) {\n *         strategy.handle(err, res);\n *       } else {\n *         // Optional: If no strategy found (shouldn't happen if Fallback is included)\n *\n *         res.status(500).json({\n *           code: \"UNKNOWN_ERROR\",\n *           message: \"An Expected error occurred.\",\n *           name: \"unknown\",\n *         });\n *       }\n *     };\n *   }\n *   tValidationError(/* ... *\\/);\n *   }\n *\n *   if (!userExists(req.params.id)) {\n *     throw new NotFoundError(/* ... *\\/);\n *   }\n *\n *   // Business logic...\n * });\n *\n * app.use(errorHandler.handle);\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "handle: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", req: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Request",
+                  "canonicalReference": "@types/express!e.Request:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", res: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Response",
+                  "canonicalReference": "@types/express!e.Response:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", next: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NextFunction",
+                  "canonicalReference": "@types/express!e.NextFunction:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "handle",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 10
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@khni/error-handler!ErrorResponse:type",
           "docComment": "/**\n * Union type representing different error response formats. Distinguishes between input validation errors and server errors.\n *\n * @typeParam CodeType - The type of the error code for server errors\n *\n * @public\n */\n",
@@ -496,6 +696,273 @@
           }
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@khni/error-handler!ErrorSerializer:type",
+          "docComment": "/**\n * A serializer function that converts raw errors into a standardized InputValidationErrorType. This allows for flexible error transformation from various validation libraries.\n *\n * @typeParam T - The type of the raw error to be serialized\n *\n * @example\n * ```typescript\n * // Zod error serializer\n * const zodSerializer: ErrorSerializer<ZodError> = (error) => ({\n *   name: \"ValidationError\",\n *   errors: error.errors.map((issue) => ({\n *     field: issue.path.join('.'),\n *     messages: [issue.message]\n *   }))\n * });\n *\n * // Yup error serializer\n * const yupSerializer: ErrorSerializer<ValidationError> = (error) => ({\n *   name: \"ValidationError\",\n *   errors: error.inner.map((err) => ({\n *     field: err.path || 'unknown',\n *     messages: [err.message]\n *   }))\n * });\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type ErrorSerializer<T = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "(error: T) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputValidationErrorType",
+              "canonicalReference": "@khni/error-handler!InputValidationErrorType:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/errors/input-validation/InputValidationError.ts",
+          "releaseTag": "Public",
+          "name": "ErrorSerializer",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!FallbackErrorStrategy:class",
+          "docComment": "/**\n * Fallback error strategy that handles any error not caught by previous strategies. This should always be the last strategy in the error handling chain.\n *\n * @remarks\n *\n * This strategy: - Always returns `true` for `canHandle` (acts as catch-all) - Logs unexpected errors for debugging - Returns a generic 500 Internal Server Error response - Ensures no error goes unhandled\n *\n * @example\n * ```typescript\n * // Always include as the last strategy\n * const strategies = [\n *   new HttpErrorHandlerStrategy(/* ... *\\/),\n *   new InputValidationErrorHandlerStrategy(/* ... *\\/),\n *   new FallbackErrorStrategy(logger) // Last in chain\n * ];\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class FallbackErrorStrategy implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "IErrorHandlingStrategy",
+              "canonicalReference": "@khni/error-handler!~IErrorHandlingStrategy:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/handler/FallBackErrorHandlerStrategy.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "FallbackErrorStrategy",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!FallbackErrorStrategy:constructor(1)",
+              "docComment": "/**\n * Creates a new FallbackErrorStrategy instance\n *\n * @param logger - Optional logger for recording unexpected errors\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(logger?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ILogger",
+                  "canonicalReference": "@khni/error-handler!ILogger:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "logger",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!FallbackErrorStrategy#canHandle:member(1)",
+              "docComment": "/**\n * Determines if this strategy can handle the error. Since this is the fallback strategy, it always returns true.\n *\n * @param err - The error to check\n *\n * @returns Always returns true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "canHandle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "canHandle"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!FallbackErrorStrategy#handle:member(1)",
+              "docComment": "/**\n * Handles unexpected errors by logging and returning a generic 500 response.\n *\n * @param err - The unexpected error\n *\n * @param res - Express response object\n *\n * @example\n * ```typescript\n * // This strategy handles any error that reaches it:\n * // - Programming errors\n * // - Third-party library errors\n * // - Database connection errors\n * // - Any unanticipated error types\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "handle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", res: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Response",
+                  "canonicalReference": "@types/express!e.Response:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "res",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "handle"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!FallbackErrorStrategy#log:member",
+              "docComment": "/**\n * Logs unexpected errors with detailed information for debugging.\n *\n * @param error - The unexpected error to log for testing purposes\n *\n * @public\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "log: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(error: any) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "log",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
           "kind": "Class",
           "canonicalReference": "@khni/error-handler!HttpError:class",
           "docComment": "/**\n * An abstract base class for HTTP-related errors. Extends the native Error class with HTTP-specific properties.\n *\n * @public\n */\n",
@@ -536,10 +1003,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " & {\n        responseMessage: string;\n    }"
-                },
-                {
-                  "kind": "Content",
                   "text": ");"
                 }
               ],
@@ -551,7 +1014,7 @@
                   "parameterName": "{ name, message, meta, code, logLevel, cause, responseMessage, }",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "isOptional": false
                 }
@@ -745,6 +1208,478 @@
             "startIndex": 1,
             "endIndex": 3
           }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!HttpErrorHandlerStrategy:class",
+          "docComment": "/**\n * Strategy for handling HttpError instances with proper status codes and serialization.\n *\n * @remarks\n *\n * This strategy: - Handles errors that extend the HttpError base class - Uses the error's statusCode property for HTTP responses - Serializes errors for both logging and client responses - Respects the error's logLevel for appropriate logging\n *\n * @example\n * ```typescript\n * const httpStrategy = new HttpErrorHandlerStrategy(\n *   new HttpErrorSerializer(),\n *   logger\n * );\n *\n * // Handles errors like:\n * // - NotFoundError (404)\n * // - BadRequestError (400)\n * // - UnauthorizedError (401)\n * // - InternalServerError (500)\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class HttpErrorHandlerStrategy implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "IErrorHandlingStrategy",
+              "canonicalReference": "@khni/error-handler!~IErrorHandlingStrategy:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/handler/HttpErrorHandlerStrategy.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "HttpErrorHandlerStrategy",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!HttpErrorHandlerStrategy:constructor(1)",
+              "docComment": "/**\n * Creates a new HttpErrorHandlerStrategy instance\n *\n * @param httpErrorSerializer - Serializer for HTTP error responses\n *\n * @param logger - Optional logger for error logging\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(httpErrorSerializer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IHttpErrorSerializer",
+                  "canonicalReference": "@khni/error-handler!IHttpErrorSerializer:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", logger?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ILogger",
+                  "canonicalReference": "@khni/error-handler!ILogger:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "httpErrorSerializer",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "logger",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!HttpErrorHandlerStrategy#canHandle:member(1)",
+              "docComment": "/**\n * Determines if this strategy can handle the error.\n *\n * @param err - The error to check\n *\n * @returns True if the error is an instance of HttpError\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "canHandle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "canHandle"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!HttpErrorHandlerStrategy#handle:member(1)",
+              "docComment": "/**\n * Handles HttpError instances by logging and sending formatted responses.\n *\n * @param err - The HttpError to handle\n *\n * @param res - Express response object\n *\n * @example\n * ```typescript\n * // Example error flow:\n * throw new NotFoundError('User', { userId: '123' });\n *\n * // This strategy will:\n * // 1. Log with 'info' level (based on error.logLevel)\n * // 2. Return 404 status code\n * // 3. Send client-safe error response\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "handle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", res: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Response",
+                  "canonicalReference": "@types/express!e.Response:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "res",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "handle"
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!HttpErrorSerializer:class",
+          "docComment": "/**\n * Default implementation of IHttpErrorSerializer that provides comprehensive error serialization for HTTP errors.\n *\n * Features: - Error chain flattening for complete root cause analysis - Client-safe response generation - Detailed error information for logging - Protection against circular reference infinite loops\n *\n * @example\n * ```typescript\n * const serializer = new HttpErrorSerializer();\n *\n * // For logging purposes\n * const detailedError = serializer.serializerError(httpError);\n * logger.error('Request failed', detailedError);\n *\n * // For client responses\n * const clientError = serializer.serializeResponse(httpError);\n * res.status(500).json(clientError);\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class HttpErrorSerializer implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "IHttpErrorSerializer",
+              "canonicalReference": "@khni/error-handler!IHttpErrorSerializer:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/serializers/HttpErrorSerializer.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "HttpErrorSerializer",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!HttpErrorSerializer:constructor(1)",
+              "docComment": "/**\n * Creates a new instance of HttpErrorSerializer\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor();"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": []
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!HttpErrorSerializer#serializerError:member",
+              "docComment": "/**\n * Serializes an HttpError into a detailed object containing both top-level error information and the complete cause chain. This method is designed for logging and debugging purposes.\n *\n * @param error - The HttpError instance to serialize\n *\n * @returns Object containing top-level error details and cause chain\n *\n * @example\n * ```typescript\n * try {\n *   // Some operation that throws HttpError\n * } catch (error) {\n *   if (error instanceof HttpError) {\n *     const serialized = serializer.serializerError(error);\n *     logger.error('Operation failed', {\n *       topLevelError: serialized.topLevel,\n *       rootCause: serialized.causeChain[serialized.causeChain.length - 1]\n *     });\n *   }\n * }\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "serializerError: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(error: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HttpError",
+                  "canonicalReference": "@khni/error-handler!HttpError:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => {\n        topLevel: {\n            name: string;\n            message: string;\n            code: unknown;\n            logLevel: import(\"../errors/types.js\")."
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LogLevel",
+                  "canonicalReference": "@khni/error-handler!LogLevel:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n            responseMessage: string;\n            meta: {} | undefined;\n            stack: string | undefined;\n        };\n        causeChain: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, any>[];\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "serializerError",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 8
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!HttpErrorSerializer#serializeResponse:member",
+              "docComment": "/**\n * Serializes an HttpError into a client-safe error response. This method ensures no sensitive information (like stack traces or internal messages) is exposed to clients.\n *\n * @param error - The HttpError instance to serialize\n *\n * @returns Standardized ErrorResponse object safe for client consumption\n *\n * @example\n * ```typescript\n * app.use((error: Error, req: Request, res: Response, next: NextFunction) => {\n *   if (error instanceof HttpError) {\n *     const clientResponse = serializer.serializeResponse(error);\n *     return res.status(error.statusCode).json(clientResponse);\n *   }\n *   // Handle other error types...\n * });\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "serializeResponse: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(error: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HttpError",
+                  "canonicalReference": "@khni/error-handler!HttpError:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => {\n        errorType: \"Server\";\n        error: {\n            name: string;\n            message: string;\n            code: unknown;\n        };\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "serializeResponse",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@khni/error-handler!IHttpErrorSerializer:interface",
+          "docComment": "/**\n * Interface for serializing HttpError instances into different formats. Provides methods for full error details (logging) and client-safe responses.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface IHttpErrorSerializer "
+            }
+          ],
+          "fileUrlPath": "src/serializers/interfaces/IHttpErrorSerializer.ts",
+          "releaseTag": "Public",
+          "name": "IHttpErrorSerializer",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@khni/error-handler!IHttpErrorSerializer#serializerError:member",
+              "docComment": "/**\n * Serializes an HttpError into a detailed object including the full error chain. This method is intended for logging and debugging purposes, as it includes sensitive information like stack traces and full error messages.\n *\n * @param error - The HttpError instance to serialize\n *\n * @returns Detailed error information including the complete cause chain\n *\n * @example\n * ```typescript\n * const serializer = new HttpErrorSerializer();\n * const detailedError = serializer.serializerError(httpError);\n * logger.error('HTTP error occurred', detailedError);\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "serializerError: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(error: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HttpError",
+                  "canonicalReference": "@khni/error-handler!HttpError:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => {\n        topLevel: {\n            name: string;\n            message: string;\n            code: unknown;\n            logLevel: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LogLevel",
+                  "canonicalReference": "@khni/error-handler!LogLevel:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n            responseMessage: string;\n            meta: {} | undefined;\n            stack: string | undefined;\n        };\n        causeChain: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Array",
+                  "canonicalReference": "!Array:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, any>>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "serializerError",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 10
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@khni/error-handler!IHttpErrorSerializer#serializeResponse:member",
+              "docComment": "/**\n * Serializes an HttpError into a client-safe error response. This method strips sensitive information and returns a standardized format suitable for API responses.\n *\n * @param error - The HttpError instance to serialize\n *\n * @returns Standardized error response safe for client consumption\n *\n * @example\n * ```typescript\n * const serializer = new HttpErrorSerializer();\n * const clientResponse = serializer.serializeResponse(httpError);\n * res.status(500).json(clientResponse);\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "serializeResponse: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(error: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HttpError",
+                  "canonicalReference": "@khni/error-handler!HttpError:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ErrorResponse",
+                  "canonicalReference": "@khni/error-handler!ErrorResponse:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "serializeResponse",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 6
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -1009,6 +1944,516 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!InputValidationError:class",
+          "docComment": "/**\n * A generic error class for input validation failures that uses injected serializers to convert raw validation errors into a standardized format.\n *\n * @typeParam T - The type of the raw validation error\n *\n * @example\n * ```typescript\n * // Using with Zod\n * const zodError = new ZodError(/* ... *\\/);\n * const validationError = new InputValidationError(\n *   zodError,\n *   (error: ZodError) => ({\n *     name: \"ZodValidationError\",\n *     errors: error.errors.map(issue => ({\n *       field: issue.path.join('.'),\n *       messages: [issue.message]\n *     }))\n *   })\n * );\n *\n * // Using with class-validator\n * const validationErrors = [/* ... validation errors *\\/];\n * const validationError = new InputValidationError(\n *   validationErrors,\n *   (errors: ValidationError[]) => ({\n *     name: \"ClassValidationError\",\n *     errors: errors.map(err => ({\n *       field: err.property,\n *       messages: Object.values(err.constraints || {})\n *     }))\n *   })\n * );\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class InputValidationError<T = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": "> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error",
+              "canonicalReference": "!Error:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/errors/input-validation/InputValidationError.ts",
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "isAbstract": false,
+          "name": "InputValidationError",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!InputValidationError:constructor(1)",
+              "docComment": "/**\n * Creates a new instance of InputValidationError.\n *\n * @param rawError - The raw validation error from any validation library\n *\n * @param serializer - A function that converts the raw error to InputValidationErrorType\n *\n * @example\n * ```typescript\n * try {\n *   await validate(userInput);\n * } catch (rawError) {\n *   throw new InputValidationError(rawError, myCustomSerializer);\n * }\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(rawError: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", serializer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ErrorSerializer",
+                  "canonicalReference": "@khni/error-handler!ErrorSerializer:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rawError",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "serializer",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!InputValidationError#errors:member",
+              "docComment": "/**\n * Array of field-specific validation errors\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly errors: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        field: string;\n        messages: string[];\n    }[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "errors",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationError#getFieldErrors:member(1)",
+              "docComment": "/**\n * Gets the validation errors for a specific field.\n *\n * @param fieldName - The name of the field to get errors for\n *\n * @returns Array of error messages for the field, or empty array if no errors\n *\n * @example\n * ```typescript\n * const emailErrors = validationError.getFieldErrors('email');\n * if (emailErrors.length > 0) {\n *   console.log('Email errors:', emailErrors);\n * }\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getFieldErrors(fieldName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "fieldName",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getFieldErrors"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationError#getInvalidFields:member(1)",
+              "docComment": "/**\n * Gets all field names that have validation errors.\n *\n * @returns Array of field names with validation errors\n *\n * @example\n * ```typescript\n * const invalidFields = validationError.getInvalidFields();\n * invalidFields.forEach(field => {\n *   highlightFieldError(field);\n * });\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getInvalidFields(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getInvalidFields"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationError#hasFieldError:member(1)",
+              "docComment": "/**\n * Checks if a specific field has validation errors.\n *\n * @param fieldName - The name of the field to check\n *\n * @returns True if the field has validation errors\n *\n * @example\n * ```typescript\n * if (validationError.hasFieldError('password')) {\n *   // Show password error in UI\n * }\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hasFieldError(fieldName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "fieldName",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "hasFieldError"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@khni/error-handler!InputValidationError#name:member",
+              "docComment": "/**\n * The name of the validation error type\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationError#toJSON:member(1)",
+              "docComment": "/**\n * Converts the error to a standardized JSON format suitable for API responses.\n *\n * @returns The error in InputValidationErrorType format\n *\n * @example\n * ```typescript\n * const validationError = new InputValidationError(rawError, serializer);\n * const response = validationError.toJSON();\n *\n * // In Express middleware:\n * res.status(400).json({\n *   errorType: \"InputValidation\",\n *   error: validationError.toJSON()\n * });\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toJSON(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputValidationErrorType",
+                  "canonicalReference": "@khni/error-handler!InputValidationErrorType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "toJSON"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@khni/error-handler!InputValidationErrorHandlerStrategy:class",
+          "docComment": "/**\n * Strategy for handling input validation errors with standardized 400 responses.\n *\n * @remarks\n *\n * This strategy: - Handles InputValidationError instances from validation failures - Returns 400 Bad Request status code - Preserves structured validation error details for client feedback - Logs validation failures as warnings\n *\n * @example\n * ```typescript\n * const validationStrategy = new InputValidationErrorHandlerStrategy(logger);\n *\n * // Handles errors from:\n * // - Zod validation failures\n * // - Custom validation logic\n * // - Data transformation errors\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class InputValidationErrorHandlerStrategy implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "IErrorHandlingStrategy",
+              "canonicalReference": "@khni/error-handler!~IErrorHandlingStrategy:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/handler/InputValidationErrorHandlerStrategy.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "InputValidationErrorHandlerStrategy",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@khni/error-handler!InputValidationErrorHandlerStrategy:constructor(1)",
+              "docComment": "/**\n * Creates a new InputValidationErrorHandlerStrategy instance\n *\n * @param logger - Optional logger for validation error logging\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(logger?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ILogger",
+                  "canonicalReference": "@khni/error-handler!ILogger:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "logger",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationErrorHandlerStrategy#canHandle:member(1)",
+              "docComment": "/**\n * Determines if this strategy can handle the error.\n *\n * @param err - The error to check\n *\n * @returns True if the error is an instance of InputValidationError\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "canHandle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "canHandle"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@khni/error-handler!InputValidationErrorHandlerStrategy#handle:member(1)",
+              "docComment": "/**\n * Handles input validation errors by logging and sending structured 400 responses.\n *\n * @param err - The InputValidationError to handle\n *\n * @param res - Express response object\n *\n * @example\n * ```typescript\n * // Example validation error response:\n * {\n *   \"errorType\": \"InputValidation\",\n *   \"error\": {\n *     \"name\": \"ValidationError\",\n *     \"errors\": [\n *       {\n *         \"field\": \"email\",\n *         \"messages\": [\"Invalid email format\"]\n *       }\n *     ]\n *   }\n * }\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "handle(err: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error",
+                  "canonicalReference": "!Error:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", res: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Response",
+                  "canonicalReference": "@types/express!e.Response:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "res",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "handle"
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@khni/error-handler!InputValidationErrorType:type",
           "docComment": "/**\n * Represents a standardized error format for input validation failures. Used when client input fails validation rules.\n *\n * @public\n */\n",
@@ -1058,6 +2503,43 @@
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@khni/error-handler!zodErrorSerializer:var",
+          "docComment": "/**\n * A serializer function that converts Zod validation errors into the standardized InputValidationErrorType format. This serializer groups multiple error messages for the same field and handles nested object paths.\n *\n * @param error - The ZodError instance to serialize\n *\n * @returns Standardized InputValidationErrorType with grouped field errors\n *\n * @example\n * ```typescript\n * import { zodErrorSerializer } from './serializers/zodErrorSerializer.js';\n * import { InputValidationError } from './InputValidationError.js';\n *\n * // Basic usage with InputValidationError\n * try {\n *   await schema.parseAsync(data);\n * } catch (error) {\n *   if (error instanceof ZodError) {\n *     throw new InputValidationError(error, zodErrorSerializer);\n *   }\n *   throw error;\n * }\n *\n * // Direct usage without InputValidationError\n * const standardizedError = zodErrorSerializer(zodError);\n * ```\n *\n * @example\n * ```typescript\n * // Example of how Zod errors are transformed:\n *\n * // ZodError with multiple issues:\n * // [\n * //   { path: ['email'], message: 'Invalid email' },\n * //   { path: ['email'], message: 'Already taken' },\n * //   { path: ['profile', 'name'], message: 'Required' }\n * // ]\n *\n * // Becomes:\n * // {\n * //   name: \"ValidationError\",\n * //   errors: [\n * //     { field: \"email\", messages: [\"Invalid email\", \"Already taken\"] },\n * //     { field: \"profile.name\", messages: [\"Required\"] }\n * //   ]\n * // }\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "zodErrorSerializer: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ErrorSerializer",
+              "canonicalReference": "@khni/error-handler!ErrorSerializer:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ZodError",
+              "canonicalReference": "zod!ZodError:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "fileUrlPath": "src/errors/input-validation/zodErrorSerializer.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "zodErrorSerializer",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
           }
         }
       ]

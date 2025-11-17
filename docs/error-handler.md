@@ -4,6 +4,89 @@
 
 ## error-handler package
 
+## Classes
+
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ErrorHandler](./error-handler.errorhandler.md)
+
+
+</td><td>
+
+Main error handler that implements the Chain of Responsibility pattern. Delegates error handling to specialized strategies based on error type.
+
+
+</td></tr>
+<tr><td>
+
+[FallbackErrorStrategy](./error-handler.fallbackerrorstrategy.md)
+
+
+</td><td>
+
+Fallback error strategy that handles any error not caught by previous strategies. This should always be the last strategy in the error handling chain.
+
+
+</td></tr>
+<tr><td>
+
+[HttpErrorHandlerStrategy](./error-handler.httperrorhandlerstrategy.md)
+
+
+</td><td>
+
+Strategy for handling HttpError instances with proper status codes and serialization.
+
+
+</td></tr>
+<tr><td>
+
+[HttpErrorSerializer](./error-handler.httperrorserializer.md)
+
+
+</td><td>
+
+Default implementation of IHttpErrorSerializer that provides comprehensive error serialization for HTTP errors.
+
+Features: - Error chain flattening for complete root cause analysis - Client-safe response generation - Detailed error information for logging - Protection against circular reference infinite loops
+
+
+</td></tr>
+<tr><td>
+
+[InputValidationError](./error-handler.inputvalidationerror.md)
+
+
+</td><td>
+
+A generic error class for input validation failures that uses injected serializers to convert raw validation errors into a standardized format.
+
+
+</td></tr>
+<tr><td>
+
+[InputValidationErrorHandlerStrategy](./error-handler.inputvalidationerrorhandlerstrategy.md)
+
+
+</td><td>
+
+Strategy for handling input validation errors with standardized 400 responses.
+
+
+</td></tr>
+</tbody></table>
+
 ## Abstract Classes
 
 <table><thead><tr><th>
@@ -41,6 +124,32 @@ An abstract base class for HTTP-related errors. Extends the native Error class w
 </td></tr>
 </tbody></table>
 
+## Functions
+
+<table><thead><tr><th>
+
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[createErrHandlerMiddleware(logger)](./error-handler.createerrhandlermiddleware.md)
+
+
+</td><td>
+
+Creates a comprehensive error handling middleware for Express.js applications. This middleware uses a chain of responsibility pattern to handle different error types with appropriate strategies and serializers.
+
+
+</td></tr>
+</tbody></table>
+
 ## Interfaces
 
 <table><thead><tr><th>
@@ -56,12 +165,49 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[IHttpErrorSerializer](./error-handler.ihttperrorserializer.md)
+
+
+</td><td>
+
+Interface for serializing HttpError instances into different formats. Provides methods for full error details (logging) and client-safe responses.
+
+
+</td></tr>
+<tr><td>
+
 [ILogger](./error-handler.ilogger.md)
 
 
 </td><td>
 
 Interface for logger implementations. Provides methods for logging at different severity levels.
+
+
+</td></tr>
+</tbody></table>
+
+## Variables
+
+<table><thead><tr><th>
+
+Variable
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[zodErrorSerializer](./error-handler.zoderrorserializer.md)
+
+
+</td><td>
+
+A serializer function that converts Zod validation errors into the standardized InputValidationErrorType format. This serializer groups multiple error messages for the same field and handles nested object paths.
 
 
 </td></tr>
@@ -99,6 +245,17 @@ Constructor parameters for creating a CustomError instance.
 </td><td>
 
 Union type representing different error response formats. Distinguishes between input validation errors and server errors.
+
+
+</td></tr>
+<tr><td>
+
+[ErrorSerializer](./error-handler.errorserializer.md)
+
+
+</td><td>
+
+A serializer function that converts raw errors into a standardized InputValidationErrorType. This allows for flexible error transformation from various validation libraries.
 
 
 </td></tr>

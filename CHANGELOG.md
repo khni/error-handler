@@ -1,5 +1,38 @@
 # @khni/error-handler
 
+## 1.0.0
+
+### Major Changes
+
+---
+
+## '@khaled/error-handler': minor
+
+- **ErrorHandler**: Main coordinator using Chain of Responsibility pattern
+- **Strategy Pattern**: Specialized handlers for different error types
+- **Middleware Factory**: Easy Express.js integration
+
+- **HttpErrorHandlerStrategy**: Handles HTTP errors with status codes and serialization
+- **InputValidationErrorHandlerStrategy**: Manages validation errors with 400 responses
+- **FallbackErrorStrategy**: Catch-all for unexpected errors with 500 responses
+
+- **HttpErrorSerializer**: Consistent error response formatting
+- **Standardized Error Types**: Uniform API response structure
+- **Client-Safe Messages**: Separation of internal and external error messages
+
+- **Comprehensive Logging**: Structured logging with error context
+- **Type Safety**: Full TypeScript support with generics
+- **Extensible Design**: Easy to add custom error strategies
+- **Middleware Ready**: Express.js compatible error handling
+
+```typescript
+// Simple setup
+app.use(createErrHandlerMiddleware());
+
+// With custom logger
+app.use(createErrHandlerMiddleware(myLogger));
+```
+
 ## 0.3.0
 
 ### Minor Changes

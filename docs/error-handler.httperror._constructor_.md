@@ -9,9 +9,7 @@ Creates a new instance of HttpError.
 **Signature:**
 
 ```typescript
-constructor({ name, message, meta, code, logLevel, cause, responseMessage, }: HttpErrorConstructor & {
-        responseMessage: string;
-    });
+constructor({ name, message, meta, code, logLevel, cause, responseMessage, }: HttpErrorConstructor);
 ```
 
 ## Parameters
@@ -39,7 +37,7 @@ Description
 
 </td><td>
 
-[HttpErrorConstructor](./error-handler.httperrorconstructor.md) &amp; { responseMessage: string; }
+[HttpErrorConstructor](./error-handler.httperrorconstructor.md)
 
 
 </td><td>

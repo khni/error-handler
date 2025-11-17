@@ -76,7 +76,7 @@ export abstract class HttpError extends Error {
     logLevel,
     cause,
     responseMessage,
-  }: HttpErrorConstructor & { responseMessage: string }) {
+  }: HttpErrorConstructor) {
     super(message);
     this.name = name;
     this.message = message;
