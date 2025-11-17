@@ -177,20 +177,20 @@
     }
   },
   "kind": "Package",
-  "canonicalReference": "@khaled/error-handler!",
+  "canonicalReference": "@khni/error-handler!",
   "docComment": "",
-  "name": "@khaled/error-handler",
+  "name": "@khni/error-handler",
   "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
-      "canonicalReference": "@khaled/error-handler!",
+      "canonicalReference": "@khni/error-handler!",
       "name": "",
       "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
-          "canonicalReference": "@khaled/error-handler!CustomError:class",
+          "canonicalReference": "@khni/error-handler!CustomError:class",
           "docComment": "/**\n * A custom error class that extends the native JavaScript Error class. Provides additional properties for error handling and logging.\n *\n * @typeParam CodeType - The type of the error code (string, number, enum, etc.)\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -228,7 +228,7 @@
           "members": [
             {
               "kind": "Constructor",
-              "canonicalReference": "@khaled/error-handler!CustomError:constructor(1)",
+              "canonicalReference": "@khni/error-handler!CustomError:constructor(1)",
               "docComment": "/**\n * Creates a new instance of CustomError.\n *\n * @param constructorParams - Configuration object for the error\n *\n * @param name - The name of the error class\n *\n * @param message - Human-readable error message\n *\n * @param meta - Additional metadata for debugging\n *\n * @param code - Unique error code identifier\n *\n * @param logLevel - Severity level for logging\n *\n * @param cause - The underlying cause of the error\n *\n * @example\n * ```typescript\n * class MyCustomError extends CustomError<'INVALID_INPUT'> {\n *   constructor(params: Omit<CustomErrorConstructor<'INVALID_INPUT'>, 'name'>) {\n *     super({ ...params, name: 'MyCustomError' });\n *   }\n * }\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
@@ -238,7 +238,7 @@
                 {
                   "kind": "Reference",
                   "text": "CustomErrorConstructor",
-                  "canonicalReference": "@khaled/error-handler!CustomErrorConstructor:type"
+                  "canonicalReference": "@khni/error-handler!CustomErrorConstructor:type"
                 },
                 {
                   "kind": "Content",
@@ -265,7 +265,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!CustomError#code:member",
+              "canonicalReference": "@khni/error-handler!CustomError#code:member",
               "docComment": "/**\n * A unique identifier code for the error type.\n */\n",
               "excerptTokens": [
                 {
@@ -295,7 +295,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!CustomError#logLevel:member",
+              "canonicalReference": "@khni/error-handler!CustomError#logLevel:member",
               "docComment": "/**\n * The log level at which this error should be recorded.\n */\n",
               "excerptTokens": [
                 {
@@ -305,7 +305,7 @@
                 {
                   "kind": "Reference",
                   "text": "LogLevel",
-                  "canonicalReference": "@khaled/error-handler!LogLevel:type"
+                  "canonicalReference": "@khni/error-handler!LogLevel:type"
                 },
                 {
                   "kind": "Content",
@@ -326,7 +326,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!CustomError#message:member",
+              "canonicalReference": "@khni/error-handler!CustomError#message:member",
               "docComment": "/**\n * The human-readable error message.\n */\n",
               "excerptTokens": [
                 {
@@ -356,7 +356,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!CustomError#meta:member",
+              "canonicalReference": "@khni/error-handler!CustomError#meta:member",
               "docComment": "/**\n * Additional metadata associated with the error.\n */\n",
               "excerptTokens": [
                 {
@@ -393,7 +393,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@khaled/error-handler!CustomErrorConstructor:type",
+          "canonicalReference": "@khni/error-handler!CustomErrorConstructor:type",
           "docComment": "/**\n * Constructor parameters for creating a CustomError instance.\n *\n * @typeParam CodeType - The type of the error code\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -407,7 +407,7 @@
             {
               "kind": "Reference",
               "text": "LogLevel",
-              "canonicalReference": "@khaled/error-handler!LogLevel:type"
+              "canonicalReference": "@khni/error-handler!LogLevel:type"
             },
             {
               "kind": "Content",
@@ -441,7 +441,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@khaled/error-handler!ErrorResponse:type",
+          "canonicalReference": "@khni/error-handler!ErrorResponse:type",
           "docComment": "/**\n * Union type representing different error response formats. Distinguishes between input validation errors and server errors.\n *\n * @typeParam CodeType - The type of the error code for server errors\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -463,7 +463,7 @@
             {
               "kind": "Reference",
               "text": "InputValidationErrorType",
-              "canonicalReference": "@khaled/error-handler!InputValidationErrorType:type"
+              "canonicalReference": "@khni/error-handler!InputValidationErrorType:type"
             },
             {
               "kind": "Content",
@@ -497,7 +497,7 @@
         },
         {
           "kind": "Class",
-          "canonicalReference": "@khaled/error-handler!HttpError:class",
+          "canonicalReference": "@khni/error-handler!HttpError:class",
           "docComment": "/**\n * An abstract base class for HTTP-related errors. Extends the native Error class with HTTP-specific properties.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -522,7 +522,7 @@
           "members": [
             {
               "kind": "Constructor",
-              "canonicalReference": "@khaled/error-handler!HttpError:constructor(1)",
+              "canonicalReference": "@khni/error-handler!HttpError:constructor(1)",
               "docComment": "/**\n * Creates a new instance of HttpError.\n *\n * @param params - Configuration object for the HTTP error\n *\n * @param name - The name of the error class\n *\n * @param message - Internal error message for logging\n *\n * @param responseMessage - Safe message for client responses\n *\n * @param meta - Additional metadata for debugging\n *\n * @param code - Unique error code identifier\n *\n * @param logLevel - Severity level for logging\n *\n * @param cause - The underlying cause of the error\n *\n * @example\n * ```typescript\n * class NotFoundError extends HttpError {\n *   statusCode = 404;\n *\n *   constructor(message: string, resource: string) {\n *     super({\n *       name: 'NotFoundError',\n *       message,\n *       responseMessage: `${resource} not found`,\n *       code: 'RESOURCE_NOT_FOUND',\n *       logLevel: 'warn'\n *     });\n *   }\n * }\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
@@ -532,7 +532,7 @@
                 {
                   "kind": "Reference",
                   "text": "HttpErrorConstructor",
-                  "canonicalReference": "@khaled/error-handler!HttpErrorConstructor:type"
+                  "canonicalReference": "@khni/error-handler!HttpErrorConstructor:type"
                 },
                 {
                   "kind": "Content",
@@ -559,7 +559,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!HttpError#code:member",
+              "canonicalReference": "@khni/error-handler!HttpError#code:member",
               "docComment": "/**\n * A unique identifier code for the error type.\n */\n",
               "excerptTokens": [
                 {
@@ -589,7 +589,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!HttpError#logLevel:member",
+              "canonicalReference": "@khni/error-handler!HttpError#logLevel:member",
               "docComment": "/**\n * The log level at which this error should be recorded.\n */\n",
               "excerptTokens": [
                 {
@@ -599,7 +599,7 @@
                 {
                   "kind": "Reference",
                   "text": "LogLevel",
-                  "canonicalReference": "@khaled/error-handler!LogLevel:type"
+                  "canonicalReference": "@khni/error-handler!LogLevel:type"
                 },
                 {
                   "kind": "Content",
@@ -620,7 +620,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!HttpError#meta:member",
+              "canonicalReference": "@khni/error-handler!HttpError#meta:member",
               "docComment": "/**\n * Additional metadata associated with the error.\n */\n",
               "excerptTokens": [
                 {
@@ -650,7 +650,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!HttpError#responseMessage:member",
+              "canonicalReference": "@khni/error-handler!HttpError#responseMessage:member",
               "docComment": "/**\n * A sanitized message that can be safely returned to clients. This message should not expose sensitive internal information.\n */\n",
               "excerptTokens": [
                 {
@@ -680,7 +680,7 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@khaled/error-handler!HttpError#statusCode:member",
+              "canonicalReference": "@khni/error-handler!HttpError#statusCode:member",
               "docComment": "/**\n * The HTTP status code associated with this error. Must be implemented by concrete subclasses.\n *\n * @example\n * ```typescript\n * statusCode = 404;\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
@@ -717,7 +717,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@khaled/error-handler!HttpErrorConstructor:type",
+          "canonicalReference": "@khni/error-handler!HttpErrorConstructor:type",
           "docComment": "/**\n * Constructor parameters for creating an HttpError instance. Extends CustomErrorConstructor with HTTP-specific properties.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -727,7 +727,7 @@
             {
               "kind": "Reference",
               "text": "CustomErrorConstructor",
-              "canonicalReference": "@khaled/error-handler!CustomErrorConstructor:type"
+              "canonicalReference": "@khni/error-handler!CustomErrorConstructor:type"
             },
             {
               "kind": "Content",
@@ -748,7 +748,7 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@khaled/error-handler!ILogger:interface",
+          "canonicalReference": "@khni/error-handler!ILogger:interface",
           "docComment": "/**\n * Interface for logger implementations. Provides methods for logging at different severity levels.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -763,7 +763,7 @@
           "members": [
             {
               "kind": "MethodSignature",
-              "canonicalReference": "@khaled/error-handler!ILogger#debug:member(1)",
+              "canonicalReference": "@khni/error-handler!ILogger#debug:member(1)",
               "docComment": "/**\n * Logs a debug message.\n *\n * @param message - The debug message to log\n *\n * @param meta - Additional metadata for context\n */\n",
               "excerptTokens": [
                 {
@@ -824,7 +824,7 @@
             },
             {
               "kind": "MethodSignature",
-              "canonicalReference": "@khaled/error-handler!ILogger#error:member(1)",
+              "canonicalReference": "@khni/error-handler!ILogger#error:member(1)",
               "docComment": "/**\n * Logs an error message.\n *\n * @param message - The error message to log\n *\n * @param meta - Additional metadata for context\n */\n",
               "excerptTokens": [
                 {
@@ -885,7 +885,7 @@
             },
             {
               "kind": "MethodSignature",
-              "canonicalReference": "@khaled/error-handler!ILogger#info:member(1)",
+              "canonicalReference": "@khni/error-handler!ILogger#info:member(1)",
               "docComment": "/**\n * Logs an informational message.\n *\n * @param message - The info message to log\n *\n * @param meta - Additional metadata for context\n */\n",
               "excerptTokens": [
                 {
@@ -946,7 +946,7 @@
             },
             {
               "kind": "MethodSignature",
-              "canonicalReference": "@khaled/error-handler!ILogger#warn:member(1)",
+              "canonicalReference": "@khni/error-handler!ILogger#warn:member(1)",
               "docComment": "/**\n * Logs a warning message.\n *\n * @param message - The warning message to log\n *\n * @param meta - Additional metadata for context\n */\n",
               "excerptTokens": [
                 {
@@ -1010,7 +1010,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@khaled/error-handler!InputValidationErrorType:type",
+          "canonicalReference": "@khni/error-handler!InputValidationErrorType:type",
           "docComment": "/**\n * Represents a standardized error format for input validation failures. Used when client input fails validation rules.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1036,7 +1036,7 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@khaled/error-handler!LogLevel:type",
+          "canonicalReference": "@khni/error-handler!LogLevel:type",
           "docComment": "/**\n * Defines the severity levels for logging.\n *\n * @public\n */\n",
           "excerptTokens": [
             {

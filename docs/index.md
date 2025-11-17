@@ -10,21 +10,16 @@
 
 Package
 
-
 </th><th>
 
 Description
 
-
 </th></tr></thead>
 <tbody><tr><td>
 
-[@khaled/error-handler](./error-handler.md)
-
+[@khni/error-handler](./error-handler.md)
 
 </td><td>
 
-
 </td></tr>
 </tbody></table>
-

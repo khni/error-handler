@@ -1,4 +1,4 @@
-# @khaled/error-handler
+# @khni/error-handler
 
 ## 0.1.0
 
