@@ -1,5 +1,14 @@
 # @khni/error-handler
 
+## 0.3.0
+
+### Minor Changes
+
+- - Implement InputValidationError class with customizable serializers
+  - Add zodErrorSerializer for standardized Zod error formatting
+  - Include comprehensive error handling utilities and middleware
+  - Add detailed documentation and test coverage
+
 ## 0.2.0
 
 ### Minor Changes
