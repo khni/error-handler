@@ -10,13 +10,13 @@ Constructor parameters for creating a CustomError instance.
 
 ```typescript
 export type CustomErrorConstructor<CodeType> = {
-  message: string;
-  name: string;
-  code: CodeType;
-  logLevel: LogLevel;
-  meta?: {};
-  cause?: unknown;
+    message: string;
+    name: string;
+    code: CodeType;
+    logLevel: LogLevel;
+    meta?: {};
+    cause?: unknown;
 };
 ```
-
 **References:** [LogLevel](./error-handler.loglevel.md)
+

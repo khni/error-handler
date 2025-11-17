@@ -9,7 +9,7 @@ Interface for logger implementations. Provides methods for logging at different 
 **Signature:**
 
 ```typescript
-export interface ILogger
+export interface ILogger 
 ```
 
 ## Methods
@@ -18,45 +18,56 @@ export interface ILogger
 
 Method
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [debug(message, meta)](./error-handler.ilogger.debug.md)
 
+
 </td><td>
 
 Logs a debug message.
+
 
 </td></tr>
 <tr><td>
 
 [error(message, meta)](./error-handler.ilogger.error.md)
 
+
 </td><td>
 
 Logs an error message.
+
 
 </td></tr>
 <tr><td>
 
 [info(message, meta)](./error-handler.ilogger.info.md)
 
+
 </td><td>
 
 Logs an informational message.
+
 
 </td></tr>
 <tr><td>
 
 [warn(message, meta)](./error-handler.ilogger.warn.md)
 
+
 </td><td>
 
 Logs a warning message.
 
+
 </td></tr>
 </tbody></table>
+

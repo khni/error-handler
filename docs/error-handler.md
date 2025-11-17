@@ -10,27 +10,33 @@
 
 Abstract Class
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [CustomError](./error-handler.customerror.md)
 
+
 </td><td>
 
 A custom error class that extends the native JavaScript Error class. Provides additional properties for error handling and logging.
+
 
 </td></tr>
 <tr><td>
 
 [HttpError](./error-handler.httperror.md)
 
+
 </td><td>
 
 An abstract base class for HTTP-related errors. Extends the native Error class with HTTP-specific properties.
+
 
 </td></tr>
 </tbody></table>
@@ -41,18 +47,22 @@ An abstract base class for HTTP-related errors. Extends the native Error class w
 
 Interface
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [ILogger](./error-handler.ilogger.md)
 
+
 </td><td>
 
 Interface for logger implementations. Provides methods for logging at different severity levels.
+
 
 </td></tr>
 </tbody></table>
@@ -63,54 +73,67 @@ Interface for logger implementations. Provides methods for logging at different 
 
 Type Alias
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [CustomErrorConstructor](./error-handler.customerrorconstructor.md)
 
+
 </td><td>
 
 Constructor parameters for creating a CustomError instance.
+
 
 </td></tr>
 <tr><td>
 
 [ErrorResponse](./error-handler.errorresponse.md)
 
+
 </td><td>
 
 Union type representing different error response formats. Distinguishes between input validation errors and server errors.
+
 
 </td></tr>
 <tr><td>
 
 [HttpErrorConstructor](./error-handler.httperrorconstructor.md)
 
+
 </td><td>
 
 Constructor parameters for creating an HttpError instance. Extends CustomErrorConstructor with HTTP-specific properties.
+
 
 </td></tr>
 <tr><td>
 
 [InputValidationErrorType](./error-handler.inputvalidationerrortype.md)
 
+
 </td><td>
 
 Represents a standardized error format for input validation failures. Used when client input fails validation rules.
+
 
 </td></tr>
 <tr><td>
 
 [LogLevel](./error-handler.loglevel.md)
 
+
 </td><td>
 
 Defines the severity levels for logging.
 
+
 </td></tr>
 </tbody></table>
+

@@ -20,29 +20,36 @@ constructor({ name, message, meta, code, logLevel, cause, responseMessage, }: Ht
 
 Parameter
 
+
 </th><th>
 
 Type
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 { name, message, meta, code, logLevel, cause, responseMessage, }
 
+
 </td><td>
 
 [HttpErrorConstructor](./error-handler.httperrorconstructor.md) &amp; { responseMessage: string; }
 
+
 </td><td>
+
 
 </td></tr>
 </tbody></table>
 
 ## Example
+
 
 ```typescript
 class NotFoundError extends HttpError {
@@ -50,12 +57,13 @@ class NotFoundError extends HttpError {
 
   constructor(message: string, resource: string) {
     super({
-      name: "NotFoundError",
+      name: 'NotFoundError',
       message,
       responseMessage: `${resource} not found`,
-      code: "RESOURCE_NOT_FOUND",
-      logLevel: "warn",
+      code: 'RESOURCE_NOT_FOUND',
+      logLevel: 'warn'
     });
   }
 }
 ```
+

@@ -9,9 +9,8 @@ An abstract base class for HTTP-related errors. Extends the native Error class w
 **Signature:**
 
 ```typescript
-export declare abstract class HttpError extends Error
+export declare abstract class HttpError extends Error 
 ```
-
 **Extends:** Error
 
 ## Constructors
@@ -20,24 +19,30 @@ export declare abstract class HttpError extends Error
 
 Constructor
 
+
 </th><th>
 
 Modifiers
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [(constructor)({ name, message, meta, code, logLevel, cause, responseMessage, })](./error-handler.httperror._constructor_.md)
 
+
 </td><td>
+
 
 </td><td>
 
 Creates a new instance of HttpError.
+
 
 </td></tr>
 </tbody></table>
@@ -48,94 +53,119 @@ Creates a new instance of HttpError.
 
 Property
 
+
 </th><th>
 
 Modifiers
+
 
 </th><th>
 
 Type
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [code](./error-handler.httperror.code.md)
 
+
 </td><td>
+
 
 </td><td>
 
 unknown
 
+
 </td><td>
 
 A unique identifier code for the error type.
+
 
 </td></tr>
 <tr><td>
 
 [logLevel](./error-handler.httperror.loglevel.md)
 
+
 </td><td>
+
 
 </td><td>
 
 [LogLevel](./error-handler.loglevel.md)
 
+
 </td><td>
 
 The log level at which this error should be recorded.
+
 
 </td></tr>
 <tr><td>
 
 [meta?](./error-handler.httperror.meta.md)
 
+
 </td><td>
+
 
 </td><td>
 
 {}
 
+
 </td><td>
 
 _(Optional)_ Additional metadata associated with the error.
+
 
 </td></tr>
 <tr><td>
 
 [responseMessage](./error-handler.httperror.responsemessage.md)
 
+
 </td><td>
+
 
 </td><td>
 
 string
 
+
 </td><td>
 
 A sanitized message that can be safely returned to clients. This message should not expose sensitive internal information.
+
 
 </td></tr>
 <tr><td>
 
 [statusCode](./error-handler.httperror.statuscode.md)
 
+
 </td><td>
 
 `abstract`
+
 
 </td><td>
 
 number
 
+
 </td><td>
 
 The HTTP status code associated with this error. Must be implemented by concrete subclasses.
 
+
 </td></tr>
 </tbody></table>
+

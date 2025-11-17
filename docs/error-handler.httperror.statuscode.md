@@ -14,6 +14,8 @@ abstract statusCode: number;
 
 ## Example
 
+
 ```typescript
 statusCode = 404;
 ```
+

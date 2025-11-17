@@ -9,9 +9,8 @@ A custom error class that extends the native JavaScript Error class. Provides ad
 **Signature:**
 
 ```typescript
-export declare abstract class CustomError<CodeType> extends Error
+export declare abstract class CustomError<CodeType> extends Error 
 ```
-
 **Extends:** Error
 
 ## Constructors
@@ -20,24 +19,30 @@ export declare abstract class CustomError<CodeType> extends Error
 
 Constructor
 
+
 </th><th>
 
 Modifiers
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [(constructor)({ name, message, meta, code, logLevel, cause, })](./error-handler.customerror._constructor_.md)
 
+
 </td><td>
+
 
 </td><td>
 
 Creates a new instance of CustomError.
+
 
 </td></tr>
 </tbody></table>
@@ -48,77 +53,98 @@ Creates a new instance of CustomError.
 
 Property
 
+
 </th><th>
 
 Modifiers
+
 
 </th><th>
 
 Type
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [code](./error-handler.customerror.code.md)
 
+
 </td><td>
+
 
 </td><td>
 
 CodeType
 
+
 </td><td>
 
 A unique identifier code for the error type.
+
 
 </td></tr>
 <tr><td>
 
 [logLevel](./error-handler.customerror.loglevel.md)
 
+
 </td><td>
+
 
 </td><td>
 
 [LogLevel](./error-handler.loglevel.md)
 
+
 </td><td>
 
 The log level at which this error should be recorded.
+
 
 </td></tr>
 <tr><td>
 
 [message](./error-handler.customerror.message.md)
 
+
 </td><td>
+
 
 </td><td>
 
 string
 
+
 </td><td>
 
 The human-readable error message.
+
 
 </td></tr>
 <tr><td>
 
 [meta?](./error-handler.customerror.meta.md)
 
+
 </td><td>
+
 
 </td><td>
 
 {}
 
+
 </td><td>
 
 _(Optional)_ Additional metadata associated with the error.
 
+
 </td></tr>
 </tbody></table>
+

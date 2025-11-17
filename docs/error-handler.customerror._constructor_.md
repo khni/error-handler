@@ -20,34 +20,42 @@ constructor({ name, message, meta, code, logLevel, cause, }: CustomErrorConstruc
 
 Parameter
 
+
 </th><th>
 
 Type
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 { name, message, meta, code, logLevel, cause, }
 
+
 </td><td>
 
 [CustomErrorConstructor](./error-handler.customerrorconstructor.md)<!-- -->&lt;CodeType&gt; &amp; { name: string; }
 
+
 </td><td>
+
 
 </td></tr>
 </tbody></table>
 
 ## Example
 
+
 ```typescript
-class MyCustomError extends CustomError<"INVALID_INPUT"> {
-  constructor(params: Omit<CustomErrorConstructor<"INVALID_INPUT">, "name">) {
-    super({ ...params, name: "MyCustomError" });
+class MyCustomError extends CustomError<'INVALID_INPUT'> {
+  constructor(params: Omit<CustomErrorConstructor<'INVALID_INPUT'>, 'name'>) {
+    super({ ...params, name: 'MyCustomError' });
   }
 }
 ```
+

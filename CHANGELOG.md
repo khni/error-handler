@@ -1,5 +1,18 @@
 # @khni/error-handler
 
+## 0.2.0
+
+### Minor Changes
+
+- # implementation of IHttpErrorSerializer that provides comprehensive error serialization for HTTP errors.
+
+Features:
+
+- Error chain flattening for complete root cause analysis
+- Client-safe response generation
+- Detailed error information for logging
+- Protection against circular reference infinite loops
+
 ## 0.1.0
 
 ### Minor Changes

@@ -18,39 +18,48 @@ info(message: string, meta?: {}): void;
 
 Parameter
 
+
 </th><th>
 
 Type
 
+
 </th><th>
 
 Description
+
 
 </th></tr></thead>
 <tbody><tr><td>
 
 message
 
+
 </td><td>
 
 string
 
+
 </td><td>
 
 The info message to log
+
 
 </td></tr>
 <tr><td>
 
 meta
 
+
 </td><td>
 
 {}
 
+
 </td><td>
 
 _(Optional)_ Additional metadata for context
+
 
 </td></tr>
 </tbody></table>
@@ -58,3 +67,4 @@ _(Optional)_ Additional metadata for context
 **Returns:**
 
 void
+

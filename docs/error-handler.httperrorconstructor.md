@@ -10,8 +10,8 @@ Constructor parameters for creating an HttpError instance. Extends CustomErrorCo
 
 ```typescript
 export type HttpErrorConstructor = CustomErrorConstructor<unknown> & {
-  responseMessage: string;
+    responseMessage: string;
 };
 ```
-
 **References:** [CustomErrorConstructor](./error-handler.customerrorconstructor.md)
+

@@ -9,19 +9,17 @@ Union type representing different error response formats. Distinguishes between 
 **Signature:**
 
 ```typescript
-export type ErrorResponse<CodeType = unknown> =
-  | {
-      errorType: "InputValidation";
-      error: InputValidationErrorType;
-    }
-  | {
-      errorType: "Server";
-      error: {
+export type ErrorResponse<CodeType = unknown> = {
+    errorType: "InputValidation";
+    error: InputValidationErrorType;
+} | {
+    errorType: "Server";
+    error: {
         name: string;
         message: string;
         code: CodeType;
-      };
     };
+};
 ```
-
 **References:** [InputValidationErrorType](./error-handler.inputvalidationerrortype.md)
+

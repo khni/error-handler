@@ -10,10 +10,10 @@ Represents a standardized error format for input validation failures. Used when 
 
 ```typescript
 export type InputValidationErrorType = {
-  name: string;
-  errors: {
-    field?: string;
-    messages: string[];
-  }[];
+    name: string;
+    errors: {
+        field?: string;
+        messages: string[];
+    }[];
 };
 ```
