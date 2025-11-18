@@ -40,7 +40,7 @@ export class HttpErrorSerializer implements IHttpErrorSerializer {
    * @param error - The HttpError instance to analyze
    * @returns Array of error causes in order from immediate cause to root cause
    *
-   * @private
+   *
    *
    * @example
    * ```typescript

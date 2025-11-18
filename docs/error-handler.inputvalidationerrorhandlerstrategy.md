@@ -11,7 +11,7 @@ Strategy for handling input validation errors with standardized 400 responses.
 ```typescript
 export declare class InputValidationErrorHandlerStrategy implements IErrorHandlingStrategy 
 ```
-**Implements:** IErrorHandlingStrategy
+**Implements:** [IErrorHandlingStrategy](./error-handler.ierrorhandlingstrategy.md)
 
 ## Remarks
 

@@ -85,6 +85,17 @@ Strategy for handling input validation errors with standardized 400 responses.
 
 
 </td></tr>
+<tr><td>
+
+[MappedHttpError](./error-handler.mappedhttperror.md)
+
+
+</td><td>
+
+Concrete implementation of HttpError specifically for error mapping scenarios. This class ensures that mapped errors maintain all the properties of the original CustomError while adding HTTP-specific context.
+
+
+</td></tr>
 </tbody></table>
 
 ## Abstract Classes
@@ -148,6 +159,17 @@ Creates a comprehensive error handling middleware for Express.js applications. T
 
 
 </td></tr>
+<tr><td>
+
+[errorMapper(error, codeMapping)](./error-handler.errormapper.md)
+
+
+</td><td>
+
+Maps CustomError instances to appropriate HttpError instances using a provided mapping configuration. This function enables seamless conversion of business logic errors to HTTP errors with proper status codes and client-safe messages.
+
+
+</td></tr>
 </tbody></table>
 
 ## Interfaces
@@ -164,6 +186,17 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[IErrorHandlingStrategy](./error-handler.ierrorhandlingstrategy.md)
+
+
+</td><td>
+
+Defines the contract for error handling strategies in the error handling system. This interface follows the Strategy Pattern, allowing different error types to be handled by specialized strategies in a chain of responsibility.
+
+
+</td></tr>
+<tr><td>
 
 [IHttpErrorSerializer](./error-handler.ihttperrorserializer.md)
 

@@ -11,7 +11,7 @@ Strategy for handling HttpError instances with proper status codes and serializa
 ```typescript
 export declare class HttpErrorHandlerStrategy implements IErrorHandlingStrategy 
 ```
-**Implements:** IErrorHandlingStrategy
+**Implements:** [IErrorHandlingStrategy](./error-handler.ierrorhandlingstrategy.md)
 
 ## Remarks
 

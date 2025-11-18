@@ -17,3 +17,8 @@ export * from "./handler/ErrorHandlerContext.js";
 export * from "./handler/HttpErrorHandlerStrategy.js";
 export * from "./handler/InputValidationErrorHandlerStrategy.js";
 export * from "./handler/FallBackErrorHandlerStrategy.js";
+export * from "./handler/interfaces/IErrorHandlingStrategy.js";
+
+//mapper
+export * from "./mapper/errorMapper.js";
+export * from "./mapper/MappedHttpError.js";

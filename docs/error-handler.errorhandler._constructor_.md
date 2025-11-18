@@ -37,7 +37,7 @@ strategies
 
 </td><td>
 
-IErrorHandlingStrategy\[\]
+[IErrorHandlingStrategy](./error-handler.ierrorhandlingstrategy.md)<!-- -->\[\]
 
 
 </td><td>

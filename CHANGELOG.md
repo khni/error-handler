@@ -1,12 +1,45 @@
 # @khni/error-handler
 
+## 1.1.0
+
+### Minor Changes
+
+---
+
+## '@khni/error-handler': minor
+
+- **Automatic Conversion**: Transforms `CustomError` instances to `HttpError` with proper HTTP status codes
+- **Type-Safe Mapping**: Generic type constraints ensure compile-time safety for error codes
+- **Fallback Handling**: Automatic 500 Internal Server Error for unmapped codes
+- **Context Preservation**: Maintains metadata, causes, and log levels during conversion
+
+- **HTTP Integration**: Concrete `HttpError` implementation for mapped errors
+- **Status Code Support**: Proper HTTP status code assignment
+- **Prototype Chain**: Maintains proper inheritance for error handling
+
+- **Clean Separation**: Business logic throws domain errors, presentation layer handles HTTP concerns
+- **Consistent Responses**: Standardized error responses across the application
+- **Extensible Design**: Easy to add new error code mappings
+- **Production Ready**: Proper logging and client-safe error messages
+
+```typescript
+// Define mapping
+const errorMapping = {
+  USER_NOT_FOUND: { statusCode: 404, responseMessage: "User not found" },
+  INVALID_EMAIL: { statusCode: 400, responseMessage: "Invalid email" },
+};
+
+// Map business error to HTTP error
+const httpError = errorMapper(businessError, errorMapping);
+```
+
 ## 1.0.0
 
 ### Major Changes
 
 ---
 
-## '@khaled/error-handler': minor
+## '@khni/error-handler': minor
 
 - **ErrorHandler**: Main coordinator using Chain of Responsibility pattern
 - **Strategy Pattern**: Specialized handlers for different error types

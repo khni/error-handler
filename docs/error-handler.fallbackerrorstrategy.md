@@ -11,7 +11,7 @@ Fallback error strategy that handles any error not caught by previous strategies
 ```typescript
 export declare class FallbackErrorStrategy implements IErrorHandlingStrategy 
 ```
-**Implements:** IErrorHandlingStrategy
+**Implements:** [IErrorHandlingStrategy](./error-handler.ierrorhandlingstrategy.md)
 
 ## Remarks
 
