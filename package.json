@@ -4,6 +4,32 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "description": "A modular, extensible error handling system for Node.js and TypeScript with custom errors, HTTP errors, serializers, handlers, and mappers.",
+  "author": {
+    "name": "Khaled Eleskandrany",
+    "email": "khaledeskandrany@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khni/error-handler.git"
+  },
+  "homepage": "https://github.com/khni/error-handler#readme",
+  "bugs": {
+    "url": "https://github.com/khni/error-handler/issues"
+  },
+  "keywords": [
+    "error-handler",
+    "error-handling",
+    "custom-error",
+    "http-error",
+    "error-serialization",
+    "middleware",
+    "express",
+    "nodejs",
+    "typescript",
+    "validation"
+  ],
   "files": [
     "dist"
   ],
