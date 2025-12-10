@@ -2,19 +2,19 @@
 import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import { HttpErrorSerializer } from "../../serializers/HttpErrorSerializer.js";
 
-import { ErrorHandler } from "../ErrorHandlerContext.js";
-import { createErrHandlerMiddleware } from "../factory.js";
-import { FallbackErrorStrategy } from "../FallBackErrorHandlerStrategy.js";
-import { HttpErrorHandlerStrategy } from "../HttpErrorHandlerStrategy.js";
+import { ExpressErrorHandler } from "../express/handler.js";
+import { createErrHandlerMiddleware } from "../express/factory.js";
+import { FallbackErrorStrategy } from "../strategies/FallBackErrorHandlerStrategy.js";
+import { HttpErrorHandlerStrategy } from "../strategies/HttpErrorHandlerStrategy.js";
 
 import { mockLogger } from "./mocks.js";
-import { InputValidationErrorHandlerStrategy } from "../InputValidationErrorHandlerStrategy.js";
+import { InputValidationErrorHandlerStrategy } from "../strategies/InputValidationErrorHandlerStrategy.js";
 
 // Mock dependencies
-vi.mock("../ErrorHandlerContext");
-vi.mock("../HttpErrorHandlerStrategy");
-vi.mock("../ZodErrorHandlerStrategy");
-vi.mock("../FallBackErrorHandlerStrategy");
+vi.mock("../express/handler");
+vi.mock("../strategies/HttpErrorHandlerStrategy");
+vi.mock("../strategies/ZodErrorHandlerStrategy");
+vi.mock("../strategies/FallBackErrorHandlerStrategy");
 vi.mock("../../serializers/HttpErrorSerializer");
 vi.mock("../../serializers/ZodErrorSerializer");
 
@@ -25,7 +25,7 @@ describe("createErrHandlerMiddleware", () => {
     vi.clearAllMocks();
 
     // Mock ErrorHandler to return our fake handle function
-    (ErrorHandler as unknown as Mock).mockImplementation(() => ({
+    (ExpressErrorHandler as unknown as Mock).mockImplementation(() => ({
       handle: mockHandle,
     }));
   });
@@ -48,7 +48,7 @@ describe("createErrHandlerMiddleware", () => {
     expect(FallbackErrorStrategy).toHaveBeenCalledWith(mockLogger);
 
     // Ensure ErrorHandler got the strategies in the right order
-    expect(ErrorHandler).toHaveBeenCalledWith([
+    expect(ExpressErrorHandler).toHaveBeenCalledWith([
       expect.any(HttpErrorHandlerStrategy),
       expect.any(InputValidationErrorHandlerStrategy),
       expect.any(FallbackErrorStrategy),

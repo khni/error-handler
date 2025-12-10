@@ -1,9 +1,9 @@
-import { ILogger } from "../errors/types.js";
-import { HttpErrorSerializer } from "../serializers/HttpErrorSerializer.js";
-import { ErrorHandler } from "./ErrorHandlerContext.js";
-import { FallbackErrorStrategy } from "./FallBackErrorHandlerStrategy.js";
-import { HttpErrorHandlerStrategy } from "./HttpErrorHandlerStrategy.js";
-import { InputValidationErrorHandlerStrategy } from "./InputValidationErrorHandlerStrategy.js";
+import { ILogger } from "../../errors/types.js";
+import { HttpErrorSerializer } from "../../serializers/HttpErrorSerializer.js";
+import { ExpressErrorHandler } from "./handler.js";
+import { FallbackErrorStrategy } from "../strategies/FallBackErrorHandlerStrategy.js";
+import { HttpErrorHandlerStrategy } from "../strategies/HttpErrorHandlerStrategy.js";
+import { InputValidationErrorHandlerStrategy } from "../strategies/InputValidationErrorHandlerStrategy.js";
 
 /**
  * Creates a comprehensive error handling middleware for Express.js applications.
@@ -99,7 +99,7 @@ import { InputValidationErrorHandlerStrategy } from "./InputValidationErrorHandl
  * @see {@link HttpErrorSerializer} for HTTP error response serialization
  */
 export const createErrHandlerMiddleware = (logger?: ILogger) =>
-  new ErrorHandler([
+  new ExpressErrorHandler([
     new HttpErrorHandlerStrategy(new HttpErrorSerializer(), logger),
     new InputValidationErrorHandlerStrategy(logger),
     new FallbackErrorStrategy(logger),

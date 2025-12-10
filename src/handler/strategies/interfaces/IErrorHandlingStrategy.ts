@@ -126,5 +126,5 @@ export interface IErrorHandlingStrategy {
    * - Use consistent error response formats
    * - Consider security (don't expose sensitive error details)
    */
-  handle(err: Error, res: Response): void;
+  handle(err: Error): { status: number; response: object };
 }

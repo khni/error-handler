@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 
-import type { Response } from "express";
-import { FallbackErrorStrategy } from "../FallBackErrorHandlerStrategy.js";
+import { FallbackErrorStrategy } from "../strategies/FallBackErrorHandlerStrategy.js";
 import { mockLogger } from "./mocks.js";
 import { errorResponse } from "./data.js";
 
@@ -49,11 +48,11 @@ describe("FallbackErrorStrategy", () => {
       json: vi.fn(),
     } as unknown as Response;
 
-    strategy.handle(error, res);
+    const { status, response } = strategy.handle(error);
 
     expect(mockLogger.error).toHaveBeenCalled();
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({
+    expect(status).toBe(500);
+    expect(response).toEqual({
       errorType: "Server",
       error: {
         code: "UNKNOWN_ERROR",

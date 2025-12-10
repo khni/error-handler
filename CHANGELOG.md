@@ -1,5 +1,55 @@
 # @khni/error-handler
 
+## 2.0.0
+
+### Major Changes
+
+- Refactored error handling system to be framework-agnostic by separating error processing from HTTP response handling. Created new Hono error handler while maintaining Express compatibility.
+
+  1. **Refactored Error Handlers (Framework-Agnostic)**
+     - `HttpErrorHandlerStrategy`: Removed Express dependency, now returns `{status, response}`
+     - `InputValidationErrorHandlerStrategy`: Same refactor for validation errors
+     - `FallbackErrorStrategy`: Same refactor for fallback errors
+     - All strategies now focus on error classification and data preparation only
+  2. **Created New Express Error Handler**
+     - `ExpressErrorHandler`: Takes error data from strategies and sends Express HTTP responses
+     - Maintains same public API for Express users
+     - Now delegates to strategies for error processing
+  3. **Created New Hono Error Handler**
+     - `HonoErrorHandler`: Framework-specific handler for Hono.js
+     - Supports multiple usage patterns (middleware, onError, manual)
+     - Uses same strategies as Express handler
+  4. **Created Factory Functions**
+     - `expressErrorHandlerFactory.ts`: Factory for Express error handling
+     - `honoErrorHandlerFactory.ts`: Factory for Hono error handling
+     - Both use the same strategy chain
+  5. **Updated Documentation**
+     - All classes now have framework-agnostic documentation
+     - Added Hono-specific examples and usage patterns
+     - Clarified separation of concerns
+
+  ```
+  M errors/handlers/HttpErrorHandlerStrategy.ts
+  M errors/handlers/InputValidationErrorHandlerStrategy.ts
+  M errors/handlers/FallbackErrorHandlerStrategy.ts
+  R errors/handlers/ErrorHandler.ts → errors/handlers/ExpressErrorHandler.ts
+  A errors/handlers/HonoErrorHandler.ts
+  A errors/handlers/honoErrorHandlerFactory.ts
+  M errors/handlers/expressErrorHandlerFactory.ts
+
+  ```
+
+  - `ErrorHandler` class renamed to `ExpressErrorHandler` (export alias maintains compatibility)
+  - Strategy `handle()` method signature changed from `(err, res)` to `(err)` returning object
+  - Interface `IErrorHandlingStrategy` updated to match new signature
+
+  - ✅ Strategies are now framework-agnostic and reusable
+  - ✅ Support for multiple web frameworks (Express, Hono, and more)
+  - ✅ Clear separation of concerns
+  - ✅ Better testability
+  - ✅ Maintains backward compatibility for Express users
+  - ✅ Easy to add support for new frameworks
+
 ## 1.1.0
 
 ### Minor Changes

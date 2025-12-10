@@ -1,20 +1,20 @@
-import type { Response } from "express";
 import { IErrorHandlingStrategy } from "./interfaces/IErrorHandlingStrategy.js";
-import { HttpError } from "../errors/HttpError.js";
-import { ILogger } from "../errors/types.js";
-import { IHttpErrorSerializer } from "../serializers/interfaces/IHttpErrorSerializer.js";
+import { HttpError } from "../../errors/HttpError.js";
+import { ILogger } from "../../errors/types.js";
+import { IHttpErrorSerializer } from "../../serializers/interfaces/IHttpErrorSerializer.js";
 
 /**
- * Strategy for handling HttpError instances with proper status codes and serialization.
+ * Handles HttpError instances by logging and returning structured error data.
+ * This strategy processes errors that extend the HttpError base class.
  *
  * @public
  *
  * @remarks
  * This strategy:
- * - Handles errors that extend the HttpError base class
- * - Uses the error's statusCode property for HTTP responses
- * - Serializes errors for both logging and client responses
+ * - Processes errors that extend the HttpError base class
+ * - Returns the error's status code and serialized response
  * - Respects the error's logLevel for appropriate logging
+ * - Can be used with any HTTP framework or serverless environment
  *
  * @example
  * ```typescript
@@ -23,6 +23,19 @@ import { IHttpErrorSerializer } from "../serializers/interfaces/IHttpErrorSerial
  *   logger
  * );
  *
+ * // Example usage:
+ * try {
+ *   // ... some operation that might throw
+ * } catch (error) {
+ *   if (httpStrategy.canHandle(error)) {
+ *     const result = httpStrategy.handle(error);
+ *     // result contains { status: number, response: object }
+ *   }
+ * }
+ * ```
+ *
+ * @example
+ * ```typescript
  * // Handles errors like:
  * // - NotFoundError (404)
  * // - BadRequestError (400)
@@ -53,10 +66,10 @@ export class HttpErrorHandlerStrategy implements IErrorHandlingStrategy {
   }
 
   /**
-   * Handles HttpError instances by logging and sending formatted responses.
+   * Handles HttpError instances by logging and returning structured error data.
    *
    * @param err - The HttpError to handle
-   * @param res - Express response object
+   * @returns Object containing status code and serialized response
    *
    * @example
    * ```typescript
@@ -65,11 +78,10 @@ export class HttpErrorHandlerStrategy implements IErrorHandlingStrategy {
    *
    * // This strategy will:
    * // 1. Log with 'info' level (based on error.logLevel)
-   * // 2. Return 404 status code
-   * // 3. Send client-safe error response
+   * // 2. Return { status: 404, response: { ...serialized error... } }
    * ```
    */
-  handle(err: Error, res: Response): void {
+  handle(err: Error): { status: number; response: object } {
     const error = err as HttpError;
 
     // Log with appropriate level from the error
@@ -80,9 +92,10 @@ export class HttpErrorHandlerStrategy implements IErrorHandlingStrategy {
       );
     }
 
-    // Send response with proper status code and serialized error
-    res
-      .status(error.statusCode)
-      .json(this.httpErrorSerializer.serializeResponse(error));
+    // Return status code and serialized error response
+    return {
+      status: error.statusCode,
+      response: this.httpErrorSerializer.serializeResponse(error),
+    };
   }
 }

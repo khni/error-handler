@@ -1,10 +1,10 @@
-import type { Response } from "express";
 import { IErrorHandlingStrategy } from "./interfaces/IErrorHandlingStrategy.js";
-import { ErrorResponse, ILogger } from "../errors/types.js";
-import { InputValidationError } from "../errors/input-validation/InputValidationError.js";
+import { ErrorResponse, ILogger } from "../../errors/types.js";
+import { InputValidationError } from "../../errors/input-validation/InputValidationError.js";
 
 /**
- * Strategy for handling input validation errors with standardized 400 responses.
+ * Handles input validation errors with standardized 400 responses.
+ * This strategy processes InputValidationError instances from validation failures.
  *
  * @public
  *
@@ -23,6 +23,16 @@ import { InputValidationError } from "../errors/input-validation/InputValidation
  * // - Zod validation failures
  * // - Custom validation logic
  * // - Data transformation errors
+ *
+ * // Example usage:
+ * try {
+ *   // ... some operation that might throw
+ * } catch (error) {
+ *   if (validationStrategy.canHandle(error)) {
+ *     const result = validationStrategy.handle(error);
+ *     // result contains { status: 400, response: object }
+ *   }
+ * }
  * ```
  */
 export class InputValidationErrorHandlerStrategy
@@ -46,29 +56,32 @@ export class InputValidationErrorHandlerStrategy
   }
 
   /**
-   * Handles input validation errors by logging and sending structured 400 responses.
+   * Handles input validation errors by logging and returning structured 400 responses.
    *
    * @param err - The InputValidationError to handle
-   * @param res - Express response object
+   * @returns Object containing status code (400) and serialized validation error response
    *
    * @example
    * ```typescript
    * // Example validation error response:
    * {
-   *   "errorType": "InputValidation",
-   *   "error": {
-   *     "name": "ValidationError",
-   *     "errors": [
-   *       {
-   *         "field": "email",
-   *         "messages": ["Invalid email format"]
-   *       }
-   *     ]
+   *   status: 400,
+   *   response: {
+   *     "errorType": "InputValidation",
+   *     "error": {
+   *       "name": "ValidationError",
+   *       "errors": [
+   *         {
+   *           "field": "email",
+   *           "messages": ["Invalid email format"]
+   *         }
+   *       ]
+   *     }
    *   }
    * }
    * ```
    */
-  handle(err: Error, res: Response): void {
+  handle(err: Error): { status: number; response: object } {
     const error = err as InputValidationError;
 
     // Log validation failures as warnings
@@ -82,6 +95,9 @@ export class InputValidationErrorHandlerStrategy
       error,
     };
 
-    res.status(400).json(inputValidationError);
+    return {
+      status: 400,
+      response: inputValidationError,
+    };
   }
 }
