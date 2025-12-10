@@ -89,7 +89,7 @@ export class HonoErrorHandler {
    * app.onError(errorHandler.handler());
    * ```
    */
-  handler(): (err: Error, c: Context) => Response | Promise<Response> {
+  handle(): (err: Error, c: Context) => Response | Promise<Response> {
     return (err: Error, c: Context): Response | Promise<Response> => {
       // Find the first strategy that can handle this error
       const strategy = this.strategies.find((s) => s.canHandle(err));

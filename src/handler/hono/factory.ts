@@ -1,3 +1,4 @@
+import { MiddlewareHandler } from "hono";
 import { ILogger } from "../../errors/types.js";
 import { HttpErrorSerializer } from "../../serializers/HttpErrorSerializer.js";
 import { FallbackErrorStrategy } from "../strategies/FallBackErrorHandlerStrategy.js";
@@ -123,10 +124,10 @@ import { HonoErrorHandler } from "./handler.js";
  * @see {@link FallbackErrorStrategy} for unhandled error fallback
  * @see {@link HttpErrorSerializer} for HTTP error response serialization
  */
-export const createHonoErrorHandler = (logger?: ILogger): HonoErrorHandler => {
+export const createHonoErrorHandler = (logger?: ILogger): MiddlewareHandler => {
   return new HonoErrorHandler([
     new HttpErrorHandlerStrategy(new HttpErrorSerializer(), logger),
     new InputValidationErrorHandlerStrategy(logger),
     new FallbackErrorStrategy(logger),
-  ]);
+  ]).middleware();
 };

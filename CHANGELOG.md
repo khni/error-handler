@@ -1,5 +1,17 @@
 # @khni/error-handler
 
+## 2.1.1
+
+### Patch Changes
+
+- export hono middlware properly
+
+## 2.1.0
+
+### Minor Changes
+
+- build package to publish it to npm
+
 ## 2.0.0
 
 ### Major Changes
